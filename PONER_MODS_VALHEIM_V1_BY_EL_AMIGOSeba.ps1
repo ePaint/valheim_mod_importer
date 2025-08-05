@@ -3,7 +3,7 @@ $valheimPath = Get-ChildItem "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Un
 
 $askForPath = $true
 if ($valheimPath) {
-  $result = [System.Windows.Forms.MessageBox]::Show("Se ha encontrado una instalacion de Valheim en la siguiente ruta:`n$valheimPath`n¿Deseas usar esta ruta?","Confirmar carpeta de instalacion",[System.Windows.Forms.MessageBoxButtons]::YesNo,[System.Windows.Forms.MessageBoxIcon]::Question)
+  $result = [System.Windows.Forms.MessageBox]::Show("Se ha encontrado una instalacion de Valheim en la siguiente ruta:`n'$valheimPath'`n`nDeseas usar esta ruta?","Confirmar carpeta de instalacion",[System.Windows.Forms.MessageBoxButtons]::YesNo,[System.Windows.Forms.MessageBoxIcon]::Question)
   $askForPath = $result -eq [System.Windows.Forms.DialogResult]::No
 }
 if ($askForPath) {
@@ -54,5 +54,3 @@ $player = New-Object System.Media.SoundPlayer
 $player.SoundLocation = Join-Path $PSScriptRoot "src\PeonJobDone.wav"
 $player.LoadAsync()
 $player.PlaySync()
-
-
