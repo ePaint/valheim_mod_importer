@@ -1,3 +1,8 @@
+Write-Host "PONER_MODS_VALHEIM_V1_BY_EL_AMIGOSeba.ps1" -ForegroundColor Cyan
+Write-Host ""
+Write-Host "Este script instala mods para Valheim usando BepInEx y Script Extender" -ForegroundColor Yellow
+Write-Host ""
+Write-Host "Tranqui no doy miedo" -ForegroundColor Green
 Add-Type -AssemblyName System.Windows.Forms
 $valheimPath = Get-ChildItem "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall" | ForEach-Object { Get-ItemProperty $_.PSPath } | Select-Object DisplayName, InstallLocation | Where-Object { $_.DisplayName -like "*Valheim*" } | Select-Object -First 1 -ExpandProperty InstallLocation
 
@@ -20,7 +25,8 @@ if ($askForPath) {
     exit
   }
 }
-Write-Host "Valheim folder: $valheimPath"
+
+Write-Host "`nCarpeta seleccionada: $valheimPath"
 
 if (-not (Test-Path $valheimPath)) {
   [System.Windows.Forms.MessageBox]::Show("La ruta de instalacion de Valheim no existe: $valheimPath", "Error", [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Error)
@@ -32,9 +38,8 @@ if (-not (Test-Path $scriptExtenderPath)) {
   [System.Windows.Forms.MessageBox]::Show("No se pudo encontrar la carpeta 'script_extender' en el directorio del script.", "Error", [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Error)
   exit
 }
-Write-Host "Script extender folder: $scriptExtenderPath"
+
 $scriptExtenderModsPath = Join-Path $scriptExtenderPath "BepInEx\plugins"
-Write-Host "Script extender mods folder: $scriptExtenderModsPath"
 if (-not (Test-Path $scriptExtenderModsPath)) {
   [System.Windows.Forms.MessageBox]::Show("No se pudo encontrar la carpeta 'script_extender/BepInEx/plugins' en el directorio del script.", "Error", [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Error)
   exit
