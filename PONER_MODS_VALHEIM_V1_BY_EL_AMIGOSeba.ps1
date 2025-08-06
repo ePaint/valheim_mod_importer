@@ -59,3 +59,6 @@ $player = New-Object System.Media.SoundPlayer
 $player.SoundLocation = Join-Path $PSScriptRoot "src\PeonJobDone.wav"
 $player.LoadAsync()
 $player.PlaySync()
+
+Write-Host ""
+pause "Presiona cualquier tecla para continuar..."
