@@ -39,16 +39,17 @@ if (-not (Test-Path $scriptExtenderPath)) {
   exit
 }
 
-$scriptExtenderModsPath = Join-Path $scriptExtenderPath "BepInEx\plugins"
-if (-not (Test-Path $scriptExtenderModsPath)) {
-  [System.Windows.Forms.MessageBox]::Show("No se pudo encontrar la carpeta 'script_extender/BepInEx/plugins' en el directorio del script.", "Error", [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Error)
-  exit
-}
+$scriptExtenderModsPath = Join-Path $valheimPath "BepInEx\plugins"
 
 $modsPath = Join-Path $PSScriptRoot "mods"
 if (-not (Test-Path $modsPath)) {
   [System.Windows.Forms.MessageBox]::Show("No se pudo encontrar la carpeta 'mods' en el directorio del script.", "Error", [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Error)
   exit
+}
+
+$bepInExPath = Join-Path $valheimPath "BepInEx"
+if (Test-Path $bepInExPath) {
+  Remove-Item -Path $bepInExPath -Recurse -Force
 }
 
 Copy-Item -Path $scriptExtenderPath\* -Destination $valheimPath -Recurse -Force
